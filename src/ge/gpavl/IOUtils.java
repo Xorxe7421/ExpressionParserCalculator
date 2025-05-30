@@ -9,4 +9,18 @@ public class IOUtils {
         System.out.print(prompt);
         return scanner.nextLine();
     }
+
+    public static void printResult(double result) {
+        int integerResult = (int) result;
+
+        if (result - integerResult == 0) {
+            System.out.printf("Result: " + integerResult + "\n");
+        }else {
+            System.out.printf("Result: " + result + "\n");
+        }
+    }
+
+    public static void printError(String message) {
+        System.err.println(message);
+    }
 }

@@ -25,14 +25,10 @@ public class ExpressionParser {
                 if (token.equals("(")) {
                     operatorStack.push(token);
                 }else if (token.equals(")")) {
-                    double result = combineOperands(operatorStack, operandStack);
-                    operandStack.push(result);
-
-                    if (!operatorStack.peek().equals("(")) {
-                        result = combineOperands(operatorStack, operandStack);
+                    while (!operatorStack.peek().equals("(")) {
+                        double result = combineOperands(operatorStack, operandStack);
                         operandStack.push(result);
                     }
-
                     operatorStack.pop();
                 }else {
                     while (!operatorStack.isEmpty() && !precedenceMap.get(token).contains(operatorStack.peek()) && !operatorStack.peek().equals("(")) {
@@ -44,11 +40,8 @@ public class ExpressionParser {
             }
         }
 
-        double result = combineOperands(operatorStack, operandStack);
-        operandStack.push(result);
-
-        if (!operatorStack.isEmpty()) {
-            result = combineOperands(operatorStack, operandStack);
+        while (!operatorStack.isEmpty()) {
+            double result = combineOperands(operatorStack, operandStack);
             operandStack.push(result);
         }
 
